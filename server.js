@@ -1,8 +1,11 @@
 var express = require('express');
 var app = express();
+var cookieParser = require('cookie-parser');
 var port = process.env.PORT || 3000;
 app.use(express.static('./front_end/public')); //this serves up the public folder into the root directory
+app.use(cookieParser());
 var bodyParser = require("body-parser");
+// app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 //database
@@ -13,16 +16,19 @@ app.listen(port, function() {
   console.log('Server started on', port); 
 });
 //routes setup
-var routes = require("./server_side/routes/routes");
-app.use(routes);
 var passport = require('passport');
-app.use(require('express-session')({
-	secret: 'keyboard cat',
-	resave: false,
-	saveUninitialized: false
+var expressSession = require('express-session');
+app.use(expressSession({
+	secret: 'mySecretKey',
+	saveUninitialized: true,
+	resave: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use( express.cookieParser() );
+
+var flash = require('connect-flash');
+app.use(flash());
+var routes = require("./server_side/routes/routes")(app,passport);
+app.use('/',routes);
 
 module.exports = app;

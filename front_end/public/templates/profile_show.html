@@ -1,0 +1,32 @@
+<div class="row" ng-controller="ProfileController">
+	<div id="leftSide" class="col-md-2">
+		<div class="row">
+			<div id="profilePic">
+				<div id="profilePic">Profile Pic Placeholder</div>
+				<div class="row"  ng-show="currentUser.img_url != ''"><button class="btn" ng-click="profilePicChange">Add Profile Pic</button></div>
+				<div class="row"  ng-show="currentUser.img_url == ''"><button class="btn" ng-click="profilePicChange">Edit Profile Pic</button></div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="username">{{currentUser.firstname}} {{currentUser.lastname}}</div>
+		</div>
+		<div class="row">
+			<div id="memberSince">Member Since: {{currentUser.join_date}}</div>
+		</div>
+		<div class="row">
+			<div id="prevLikedWorkHeader">Previously Liked Works</div>
+		</div>
+		<div class="row">
+			<div id="prevLikedWorkImages">Prev Liked Works Placeholder</div>
+		</div>
+	</div>
+
+	<div id="rightSide" class="col-md-offset-2 col-md-10">
+		<div class="row">
+			<button class="btn">Add Gallery</button>
+		</div>
+		<div class="row">
+			<div id="galleryContainer">Gallery Container</div>
+		</div>
+	</div>
+</div>

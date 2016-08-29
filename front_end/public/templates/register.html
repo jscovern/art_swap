@@ -1,5 +1,5 @@
-<div class="col-md-6 col-md-offset-3">
-  <form ng-controller="UserController" ng-submit="createNewUser()" class="">
+<div class="col-md-6 col-md-offset-3" ng-controller="UserController">
+  <form ng-submit="createNewUser()" class="">
     <div>
       <div class="form-group">
       	<label for="email" class="">Email Address: </label>
@@ -26,4 +26,5 @@
       </div>
     </div>
   </form>
+  <p>{{errorMessage}}</p>
 </div>

@@ -13,11 +13,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="scripts/app.js"></script>
     <script src="scripts/front_end_controller.js"></script>
+    <script src="scripts/profile_controller.js"></script>
+    <script src="scripts/factory_user.js"></script>
 </head>
 <body ng-app="Art_Swap">
 	<div class="container">
 		<div class="row">
 			<h1 id="mainTitle">Here</h1>
+            <button ng-controller="UserController" ng-click="logout()" class="btn">Logout</button>
 		</div>
 		<div ng-view></div>
 	</div>

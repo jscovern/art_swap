@@ -2,13 +2,14 @@ var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var UserSchema = mongoose.Schema({
-	email: {type: String, unique: true},
-  	password: String,
+	email: {type: String, unique: true, required: true},
+  	password: {type: String, required: true},
 	join_date: Date,
-	personal_bio: String,
+	personal_bio: {type: String, required: true},
 	admin_user: Boolean,
-	firstname: String,
-	lastname: String
+	firstname: {type: String, required: true},
+	lastname: {type: String, required: true},
+	img_url: {type: String}
 });
 UserSchema.statics.hashPassword = function(password, cb){
     bcrypt.hash(password, null, null, cb);

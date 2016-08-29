@@ -1,4 +1,3 @@
-angular.module('Art_Swap', ['ngRoute','ui.bootstrap']);
 angular.module('Art_Swap')
   .controller('UserController', UserController)
   .config(function($routeProvider,$locationProvider){
@@ -10,15 +9,19 @@ angular.module('Art_Swap')
     .when('/register', {
     	templateUrl: "/templates/register.html",
     	controller: "UserController"
-    }) ;
+    })
+    .when('/profile/:id', {
+      templateUrl: "/templates/profile_show.html",
+      controller: "UserController"
+    });
   });
-  // .factory('NewChartScope', NewChartScope);
 
 UserController.$inject = ["$http","$scope"];
 
 function UserController($http,$scope) {
 	$scope.login = login;
 	$scope.createNewUser = createNewUser;
+  $scope.logout = logout;
   var today = new Date();
   $scope.today = formatDate(today);
   $scope.newUser = {admin_user: false, join_date: $scope.today};
@@ -28,9 +31,13 @@ function UserController($http,$scope) {
     console.log('in createNewUser front_end');
     $http.post('/register',$scope.newUser)
       .then(function(response) {
-        $scope.loginUser.email = $scope.newUser.email;
-        $scope.loginUser.password = $scope.newUser.password;
-        login();
+        if(!response.data.error) {
+          $scope.loginUser.email = $scope.newUser.email;
+          $scope.loginUser.password = $scope.newUser.password;
+          login();
+        } else {
+          $scope.errorMessage = response.data.message;
+        }
       });
 	}
 
@@ -50,11 +57,21 @@ function UserController($http,$scope) {
   }
 
   function login() {
-    console.dir($scope.loginUser);
+    console.log('in the login function');
     $http.post('/login',$scope.loginUser)
       .then(function(response) {
-        console.log("response inside the login function: "+response);
-        response.redirect('/home');
+        $scope.errorMessage = response.data.message;
+        console.dir(response);
+        console.dir(response.data.reqsession);
+        window.location.assign(response.data.url);
+      });
+  }
+
+  function logout() {
+    console.log('in the logout function');
+    $http.get('/logout')
+      .then(function(response) {
+        window.location.assign(response.data.url);
       });
   }
 }
