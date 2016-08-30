@@ -2,6 +2,8 @@ var express = require('express'),
     router = express.Router(),
     bodyParser = require('body-parser');
 var usersController = require('../controllers/usersController');
+var galleriesController = require('../controllers/galleriesController');
+// var profileController = require('../controllers/profileController');
 var isAuth = function (req, res, next) {
   console.log('in isauth');
   console.log(req);
@@ -21,6 +23,7 @@ router.get('/logout', usersController.logout);
 router.post('/login',usersController.login);
 // router.get('/home',isAuth, usersController.home);
 router.get('/api/user/:id',usersController.getUserInfo);
-router.put('/api/user/edit/:id',usersController.updateUser);
+router.put('/api/user/edit/:id',isAuth,usersController.updateUser);
+router.post('/api/gallery/new',usersController.createGallery);
 return router;
 };

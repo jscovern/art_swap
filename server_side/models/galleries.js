@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var User = require("./user.js").schema;
+var User = require("./users.js").schema;
 var GallerySchema = mongoose.Schema({
 	name: {type: String, required: true},
   	status: {type: Boolean},

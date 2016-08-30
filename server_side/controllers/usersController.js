@@ -1,4 +1,5 @@
 var User = require('../models/users');
+var Gallery = require('../models/galleries');
 var LocalStrategy = require('passport-local').Strategy;
 var passport = require('passport');
 
@@ -58,24 +59,6 @@ function login(req,res,next) {
 		  })(req,res,next);
 		}
 
-
-// passport.serializeUser( function(user, done) {
-//   console.log('inside of serializuser');
-//   console.log(user);
-//   var role="";
-//   if(user.admin_user) {role="admin";}
-//   var sessionUser = { _id: user._id, firstname: user.firstname, lastname: user.lastname, role: role };
-//   console.log("sessionuser is: "+sessionUser);
-//   done(null, sessionUser);
-// });
-
-// passport.deserializeUser( function(sessionUser, done) {
-// 	console.log('in deserialize');
-//   User.findById(sessionUser._id, function(err, user) {
-//     done(err, user);
-//   });
-// });
-
 passport.use(new LocalStrategy({usernameField: 'email'},
   function(email, password, done) {
     User.findOne({ email: email }, function (err, user) {
@@ -103,6 +86,7 @@ function logout(req,res) {
 
 function getUserInfo(req,res) {
 	console.log('in getUserInfo');
+	console.log('req.user: '+req.user);
 	var id = req.params.id;
 	console.log(id);
 	console.log(req.user);
@@ -136,10 +120,22 @@ function updateUser(req,res) {
 	});
 }
 
+function createGallery(req,res) {
+	console.log('in the createGallery');
+	console.log(req.body);
+	console.log(req.user);
+	console.log(req.params);
+	var gallery = req.body;
+	gallery.user = req.user._id;
+	console.log(gallery);
+}
+
+
 module.exports = {
 	createNewUser: createNewUser,
 	logout: logout,
 	login: login,
 	getUserInfo: getUserInfo,
-	updateUser: updateUser
+	updateUser: updateUser,
+	createGallery: createGallery
 };
