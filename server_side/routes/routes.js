@@ -21,5 +21,6 @@ router.get('/logout', usersController.logout);
 router.post('/login',usersController.login);
 // router.get('/home',isAuth, usersController.home);
 router.get('/api/user/:id',usersController.getUserInfo);
+router.put('/api/user/edit/:id',usersController.updateUser);
 return router;
 };

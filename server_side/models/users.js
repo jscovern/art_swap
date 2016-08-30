@@ -9,7 +9,7 @@ var UserSchema = mongoose.Schema({
 	admin_user: Boolean,
 	firstname: {type: String, required: true},
 	lastname: {type: String, required: true},
-	img_url: {type: String}
+	img_url: {type: String, required: false}
 });
 UserSchema.statics.hashPassword = function(password, cb){
     bcrypt.hash(password, null, null, cb);

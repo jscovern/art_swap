@@ -59,22 +59,22 @@ function login(req,res,next) {
 		}
 
 
-passport.serializeUser( function(user, done) {
-  console.log('inside of serializuser');
-  console.log(user);
-  var role="";
-  if(user.admin_user) {role="admin";}
-  var sessionUser = { _id: user._id, firstname: user.firstname, lastname: user.lastname, role: role };
-  console.log("sessionuser is: "+sessionUser);
-  done(null, sessionUser);
-});
+// passport.serializeUser( function(user, done) {
+//   console.log('inside of serializuser');
+//   console.log(user);
+//   var role="";
+//   if(user.admin_user) {role="admin";}
+//   var sessionUser = { _id: user._id, firstname: user.firstname, lastname: user.lastname, role: role };
+//   console.log("sessionuser is: "+sessionUser);
+//   done(null, sessionUser);
+// });
 
-passport.deserializeUser( function(sessionUser, done) {
-	console.log('in deserialize');
-  User.findById(sessionUser._id, function(err, user) {
-    done(err, user);
-  });
-});
+// passport.deserializeUser( function(sessionUser, done) {
+// 	console.log('in deserialize');
+//   User.findById(sessionUser._id, function(err, user) {
+//     done(err, user);
+//   });
+// });
 
 passport.use(new LocalStrategy({usernameField: 'email'},
   function(email, password, done) {
@@ -111,20 +111,35 @@ function getUserInfo(req,res) {
 		res.json({message: "Couldn't find the user b/c "+error});
 	}
 	res.json({user: user});
-});
-
+	});
 }
 
-// function home(req,res) {
-// 	console.log('in the home');
-// 	console.dir(req.user);
-// 	return {user: req.user};
-// }
+function updateUser(req,res) {
+	var id = req.params.id;
+	console.log('in the updateuser');
+	console.dir(req.body);
+	var userToUpdate = new User(req.body);
+	console.log('userToUpdate is:');
+	console.dir(userToUpdate);
+	User.findById({_id: id}, function(error,user) {
+		if(error) {
+			console.log(error);
+		}
+		user.img_url = req.body.img_url;
+		user.save(function(error) {
+			if(error) {
+				console.log(error);
+				return error;
+			}
+			console.log(error);
+		});
+	});
+}
 
 module.exports = {
 	createNewUser: createNewUser,
 	logout: logout,
 	login: login,
-	getUserInfo: getUserInfo
-	// home: home
+	getUserInfo: getUserInfo,
+	updateUser: updateUser
 };

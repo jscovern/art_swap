@@ -1,10 +1,12 @@
 <div class="row" ng-controller="ProfileController">
 	<div id="leftSide" class="col-md-2">
 		<div class="row">
-			<div id="profilePic">
-				<div id="profilePic">Profile Pic Placeholder</div>
-				<div class="row"  ng-show="currentUser.img_url != ''"><button class="btn" ng-click="profilePicChange">Add Profile Pic</button></div>
-				<div class="row"  ng-show="currentUser.img_url == ''"><button class="btn" ng-click="profilePicChange">Edit Profile Pic</button></div>
+			<div id="profilePicContainer">
+				<div id="profilePicPlaceholder"><span ng-show="currentUser.img_url == ''">Profile Pic Placeholder</span>
+					<img id="profilePic" src="{{currentUser.img_url}}" ng-show="currentUser.img_url != ''">
+				</div>
+				<div class="row"  ng-show="currentUser.img_url != ''"><button class="btn" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Add Profile Pic</button></div>
+				<div class="row"  ng-show="currentUser.img_url == ''" ngf-select="upload($file)"><button class="btn"  ngf-select="upload($file)">Edit Profile Pic</button></div>
 			</div>
 		</div>
 		<div class="row">
@@ -21,7 +23,7 @@
 		</div>
 	</div>
 
-	<div id="rightSide" class="col-md-offset-2 col-md-10">
+	<div id="rightSide" class="col-md-10">
 		<div class="row">
 			<button class="btn">Add Gallery</button>
 		</div>
