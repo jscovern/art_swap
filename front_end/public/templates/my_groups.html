@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="ProfileController" ng-init="getUserInfo()">
+  <div class="container">
+    <ul class="nav navbar-nav">
+	    <li class=""><a href="/#/profile/{{currentUser._id}}">My Profile</a></li>
+	    <li><a href="/#/swaps/{{currentUser._id}}">Swaps</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" ng-controller="ProfileController" ng-init="getUserInfo()">
+	<a class="btn btn-success" href="/#/groups/new/{{currentUser._id}}">Add a Group</a>
+</div>
+
+<div class="container" ng-controller="ProfileController" ng-init="findMyGroups()">
+	<div ng-repeat="group in myGroups"><a ng-click="setCurrGroup(group._id)" href="/#/addToGroup/{{group._id}}" class="btn btn-primary">{{group.name}}</a></div>
+</div>

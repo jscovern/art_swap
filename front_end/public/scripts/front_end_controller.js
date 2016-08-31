@@ -16,12 +16,24 @@ angular.module('Art_Swap')
     })
     .when('/addGallery/:id', {
       templateUrl: "/templates/newgallery.html"
+    })
+    .when('/addWork/:id', {
+      templateUrl: "/templates/new_work.html"
+    })
+    .when('/mygroups/:id', {
+      templateUrl: "/templates/my_groups.html"
+    })
+    .when('/groups/new/:id', {
+      templateUrl: "/templates/new_group.html"
+    })
+    .when('/addToGroup/:id', {
+      templateUrl: "/templates/adduserstogroup.html"
     });
   });
 
-UserController.$inject = ["$http","$scope"];
+UserController.$inject = ["$http","$scope","$routeParams"];
 
-function UserController($http,$scope) {
+function UserController($http,$scope,$routeParams) {
 	$scope.login = login;
 	$scope.createNewUser = createNewUser;
   $scope.logout = logout;
@@ -29,6 +41,10 @@ function UserController($http,$scope) {
   $scope.today = formatDate(today);
   $scope.newUser = {admin_user: false, join_date: $scope.today};
   $scope.loginUser = {};
+  $scope.getAllUsers = getAllUsers;
+  $scope.addUserToGroup = addUserToGroup;
+  $scope.setCurrGroup = setCurrGroup;
+
 
 	function createNewUser() {
     console.log('in createNewUser front_end');
@@ -55,26 +71,45 @@ function UserController($http,$scope) {
       }
     }
     var formatted = [myDate.getFullYear(),"-", mm,"-", dd].join('');
-    console.log(formatted);
     return formatted;
   }
 
   function login() {
-    console.log('in the login function');
     $http.post('/login',$scope.loginUser)
       .then(function(response) {
         $scope.errorMessage = response.data.message;
-        console.dir(response);
-        console.dir(response.data.reqsession);
         window.location.assign(response.data.url);
       });
   }
 
   function logout() {
-    console.log('in the logout function');
     $http.get('/logout')
       .then(function(response) {
         window.location.assign(response.data.url);
       });
   }
+
+  function getAllUsers() {
+    $http.get('/api/users')
+      .then(function(response) {
+        $scope.allUsers = response.data;
+      });
+  }
+
+  function addUserToGroup(user_id) {
+    group_id = $routeParams.id;
+    var postData = {group_id: group_id, user_id: user_id};
+    console.dir(postData);
+    $http.post('/api/usersingroup/new', postData)
+      .then(function(response) {
+        console.log(response.data);
+      });
+  }
+
+  function setCurrGroup(group_id) {
+    $scope.currGroup = {};
+    $scope.currGroup.id = group_id;
+  }
+
+
 }

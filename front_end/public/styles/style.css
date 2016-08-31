@@ -7,3 +7,21 @@
 	height: 200px;
 	width: 200px;
 }
+
+.works {
+	height: 200px;
+	width: 200px;
+}
+
+.nav {
+	padding-bottom: 10px;
+}
+
+.searchPreview{
+	height: 100px;
+	width: 100px;
+}
+
+.userSearch:hover {
+	cursor: pointer;
+}

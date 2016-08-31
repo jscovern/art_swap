@@ -1,4 +1,13 @@
-<div class="row" ng-controller="ProfileController">
+<div class="row" ng-controller="ProfileController" ng-init="getUserInfo()">
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container">
+	    <ul class="nav navbar-nav">
+		    <li class=""><a href="/#/swaps/{{currentUser._id}}">Swaps</a></li>
+		    <li><a href="/#/mygroups/{{currentUser._id}}">Groups</a></li>
+	    </ul>
+	  </div>
+	</nav>
+
 	<div id="leftSide" class="col-md-2">
 		<div class="row">
 			<div id="profilePicContainer">
@@ -25,10 +34,14 @@
 
 	<div id="rightSide" class="col-md-10">
 		<div class="row">
-			<a class="btn btn-primary" ng-click="createGallery()" href="/#/addGallery/{{currentUser._id}}">Add Gallery</a>
+			<a class="btn btn-primary" href="/#/addGallery/{{currentUser._id}}">Add Gallery</a>
 		</div>
-		<div class="row">
-			<div id="galleryContainer">Gallery Container</div>
+		<div class="row" ng-repeat="gallery in currentUser.galleryDocs">
+			<div id="" class="col-md-11">{{gallery.name}}
+				<img ng-repeat="work in gallery.works" class="works" src="{{work.img_url}}">
+			</div>
+			<a class="col-md-1 btn btn-primary" href="/#/addWork/{{gallery._id}}">Add Work</a>
 		</div>
 	</div>
 </div>
+

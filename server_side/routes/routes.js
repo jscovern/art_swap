@@ -3,7 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 var usersController = require('../controllers/usersController');
 var galleriesController = require('../controllers/galleriesController');
-// var profileController = require('../controllers/profileController');
+var groupsController = require('../controllers/groupsController');
 var isAuth = function (req, res, next) {
   console.log('in isauth');
   console.log(req);
@@ -21,9 +21,13 @@ module.exports = function(app,passport) {//router;
 router.post('/register',usersController.createNewUser);
 router.get('/logout', usersController.logout);
 router.post('/login',usersController.login);
-// router.get('/home',isAuth, usersController.home);
 router.get('/api/user/:id',usersController.getUserInfo);
 router.put('/api/user/edit/:id',isAuth,usersController.updateUser);
-router.post('/api/gallery/new',usersController.createGallery);
+router.post('/api/gallery/new',galleriesController.createGallery);
+router.post('/api/work/new/:id',galleriesController.createWork);
+router.post('/api/group/new/:id',groupsController.newGroup);
+router.get('/api/user/groups/:id',groupsController.getMyGroups);
+router.get('/api/users',usersController.allUsers);
+router.post('/api/usersingroup/new', groupsController.addUserToGroup);
 return router;
 };

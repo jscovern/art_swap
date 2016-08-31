@@ -1,0 +1,10 @@
+<div class="col-md-6 col-md-offset-3" ng-controller="UserController" ng-init="getAllUsers()">
+  <form class="">
+      <label>Add Users to Group: <input placeholder="Start Typing Their Name..." ng-model="searchText"></label>
+        <div id="userMatches">
+          <div class="userSearch" ng-repeat="user in allUsers | filter:searchText" ng-click="addUserToGroup(user._id)">{{user.firstname}} {{user.lastname}} <img src="{{user.img_url}}" class="searchPreview">
+          </div>
+        </div>
+    </div>
+  </form>
+</div>

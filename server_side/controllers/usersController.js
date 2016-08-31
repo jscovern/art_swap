@@ -7,13 +7,11 @@ var app = require('../../server.js');
 
 passport.serializeUser( function(user, done) {
   var sessionUser = { _id: user._id, firstname: user.firstname, lastname: user.lastname, admin_user: user.admin_user };
-  console.log("sessionuser is: "+sessionUser);
   done(null, sessionUser);
 });
 
 passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
-            console.log('deserializing user:',user);
             done(err, user);
         });
     });
@@ -85,26 +83,24 @@ function logout(req,res) {
 }
 
 function getUserInfo(req,res) {
-	console.log('in getUserInfo');
-	console.log('req.user: '+req.user);
 	var id = req.params.id;
-	console.log(id);
-	console.log(req.user);
 	User.findById({_id: id}, function(error,user) {
 	if(error) {
-		res.json({message: "Couldn't find the user b/c "+error});
+		return res.json({message: "Couldn't find the user b/c "+error});
 	}
-	res.json({user: user});
+		Gallery.find({_id: {$in: user.galleries}}, function(err,galleries){
+			if(err) {
+				return res.json({message: "Couldn't find the galleries for the user b/c "+err});
+			}else{
+				return res.json({user: user, usergalleries: galleries});
+			}
+		});
 	});
 }
 
 function updateUser(req,res) {
 	var id = req.params.id;
-	console.log('in the updateuser');
-	console.dir(req.body);
 	var userToUpdate = new User(req.body);
-	console.log('userToUpdate is:');
-	console.dir(userToUpdate);
 	User.findById({_id: id}, function(error,user) {
 		if(error) {
 			console.log(error);
@@ -120,16 +116,15 @@ function updateUser(req,res) {
 	});
 }
 
-function createGallery(req,res) {
-	console.log('in the createGallery');
-	console.log(req.body);
-	console.log(req.user);
-	console.log(req.params);
-	var gallery = req.body;
-	gallery.user = req.user._id;
-	console.log(gallery);
+function allUsers(req,res) {
+	User.find({}, function(error,users) {
+		if(error) {
+			console.log(error);
+		} else{
+			return res.json(users);
+		}
+	});
 }
-
 
 module.exports = {
 	createNewUser: createNewUser,
@@ -137,5 +132,5 @@ module.exports = {
 	login: login,
 	getUserInfo: getUserInfo,
 	updateUser: updateUser,
-	createGallery: createGallery
+	allUsers: allUsers
 };
