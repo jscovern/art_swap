@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 //database
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/art_swap");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/art_swap");
 // start server
 app.listen(port, function() {
   console.log('Server started on', port); 
