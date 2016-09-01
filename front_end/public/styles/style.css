@@ -7,7 +7,7 @@
   margin: 0 auto;
   padding-left: -100000px;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
 }
 
 #loginContainer {
