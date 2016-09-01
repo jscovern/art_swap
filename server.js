@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
-var port = process.env.PORT || 3000;
+var port = server.listen(process.env.PORT || 3000);
 app.use(express.static('./front_end/public')); //this serves up the public folder into the root directory
 app.use(cookieParser());
 var bodyParser = require("body-parser");
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/art_swap");
 // start server
-app.listen(process.env.PORT || port, function() {
+app.listen(port, function() {
   console.log('Server started on', port); 
 });
 //routes setup
