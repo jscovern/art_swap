@@ -48,11 +48,11 @@ function createNewUser(request,response) {
 function login(req,res,next) {
 	passport.authenticate('local', {failureFlash: true },
 		  function(err, user,info) {
-		  	if(err) {return next(err);}
-		  	if(!user){return res.json({url: '/#/login', message: info.message});}
+		  	if(err) {err="Incorrect Password or Email!";return next(err);}
+		  	if(!user){info.message = "Incorrect Email or Password!";return res.json({url: '/#/login', message: info.message});}
 		  	req.logIn(user,function(err) { //need to explicitly call req.login here, so that serializing happens: http://stackoverflow.com/questions/36525187/passport-serializeuser-is-not-called-with-this-authenticate-callback
-		  		if (err) {return next(err);}
-		  		return res.json({url: '/#/profile/'+user._id, user: user, requser: req.user, reqsession: req.session});
+		  		if (err) {err="Incorrect Password!";return next(err);}
+		  		return res.json({url: '/#/profile/'+user._id, user: user});
 		  	});
 		  })(req,res,next);
 		}

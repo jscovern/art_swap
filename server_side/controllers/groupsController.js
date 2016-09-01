@@ -5,7 +5,6 @@ var app = require('../../server.js');
 
 function newGroup(req,res) {
 	var group = new Group(req.body);
-
 	group.save(function(err) {
 		if(err){
 			console.log('error saving new group '+err);
@@ -20,7 +19,8 @@ function newGroup(req,res) {
 function getMyGroups(req,res) {
 	var user_id = req.params.id;
 	console.log('in the getmygroups');
-	Group.find({active_users: user_id}, function(error,groups) {
+	var newGroups = [];
+	Group.find({active_users: user_id}).populate('active_users').exec(function(error,groups) {
 		if(error) {
 			console.log(error);
 			return res.json({message: "Error getting your groups b/c: "+error, error:true});
@@ -28,6 +28,7 @@ function getMyGroups(req,res) {
 		return res.json(groups);
 	});
 }
+
 
 function addUserToGroup(req,res) {
 	var user_id = req.body.user_id;

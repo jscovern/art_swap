@@ -1,3 +1,51 @@
+#homePage{
+  background:url('../images/barnes_background.jpg');
+  background-size:cover;
+  position:relative;
+  height:100vh;
+  width: 100vw;
+  margin: 0 auto;
+  padding-left: -100000px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#loginContainer {
+	background-color:rgba(255, 255, 255, 0.2);
+}
+
+#loginNav {
+	background-color:rgba(255, 255, 255, 0.2);
+	margin-bottom: 0;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+#formHeading,#formRegisterHeading {
+	text-align: center;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  /*background-color: #fff;*/
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.form-signin-heading{
+  margin-bottom: 30px;
+  font-size: 36px;
+  color: white;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
 #profilePicContainer {
 	border: 1px solid black;
 	height: 200px;
@@ -22,6 +70,59 @@
 	width: 100px;
 }
 
+.preview{
+	height: 100px;
+	width: 100px;
+}
+
+.userSearch {
+	/*border: 1px solid black;*/
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+#userMatches {
+	border: 1px solid grey;
+}
+
 .userSearch:hover {
 	cursor: pointer;
+}
+
+.centerText {
+	text-align: center;
+}
+
+h1 {
+	font-size: 3.5em;
+	color: white;
+	margin: 40px;
+}
+
+#profileShowContainer {
+	margin-top: 65px;
+}
+
+.works {
+	border-radius: 5px;
+	margin-right: 5px;
+	margin-top: 7px;
+	padding: 2px;
+	border: 1px solid lightgrey;
+}
+
+.addWorkButton{
+	text-align: center;
+}
+
+.panel-heading {
+	padding: 4px 15px;
+}
+
+.panel-title {
+	font-size: 27px;
+}
+
+.panel-body {
+	padding: 7px;
 }

@@ -12,5 +12,5 @@
 </div>
 
 <div class="container" ng-controller="ProfileController" ng-init="findMyGroups()">
-	<div ng-repeat="group in myGroups"><a ng-click="setCurrGroup(group._id)" href="/#/addToGroup/{{group._id}}" class="btn btn-primary">{{group.name}}</a></div>
+	<div ng-repeat="group in myGroups"><a href="/#/addToGroup/{{group._id}}" class="btn btn-primary">{{group.name}}</a><p ng-repeat="user in group.active_users"><a href="/#/profile/{{user._id}}">{{user.firstname}} {{user.lastname}} <img class="preview" ng-src="{{user.img_url}}"></a></div>
 </div>

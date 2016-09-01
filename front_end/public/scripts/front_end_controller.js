@@ -2,9 +2,12 @@ angular.module('Art_Swap')
   .controller('UserController', UserController)
   .config(function($routeProvider,$locationProvider){
     $routeProvider
+    .when('/', {
+      templateUrl: "/templates/home.html"
+    })
     .when('/login', {
-      templateUrl: "/templates/login.html",
-      controller: "UserController"
+      templateUrl: "/templates/home.html",
+      // controller: "UserController"
     })
     .when('/register', {
     	templateUrl: "/templates/register.html",
@@ -31,20 +34,23 @@ angular.module('Art_Swap')
     });
   });
 
-UserController.$inject = ["$http","$scope","$routeParams"];
+UserController.$inject = ["$http","$scope","$routeParams","sharedservices"];
 
-function UserController($http,$scope,$routeParams) {
-	$scope.login = login;
+function UserController($http,$scope,$routeParams,sharedservices) {
+  $scope.sharedservices = sharedservices;
+  $scope.message = "";
+  $scope.errorMessage = "";
+	$scope.loginOrRegister = "login";
+  $scope.loginOrRegisterChange = loginOrRegisterChange;
+  $scope.login = login;
 	$scope.createNewUser = createNewUser;
   $scope.logout = logout;
   var today = new Date();
   $scope.today = formatDate(today);
-  $scope.newUser = {admin_user: false, join_date: $scope.today};
+  $scope.newUser = {admin_user: false, join_date: $scope.today, img_url: ""};
   $scope.loginUser = {};
   $scope.getAllUsers = getAllUsers;
   $scope.addUserToGroup = addUserToGroup;
-  $scope.setCurrGroup = setCurrGroup;
-
 
 	function createNewUser() {
     console.log('in createNewUser front_end');
@@ -77,7 +83,11 @@ function UserController($http,$scope,$routeParams) {
   function login() {
     $http.post('/login',$scope.loginUser)
       .then(function(response) {
-        $scope.errorMessage = response.data.message;
+        $scope.message = response.data.message;
+        sharedservices.setWhoIsLoggedIn(response.data.user._id);
+        localStorage.setItem('user_id',response.data.user._id);
+        localStorage.setItem('loggedIn',true);
+        console.log(sharedservices.loggedIn());
         window.location.assign(response.data.url);
       });
   }
@@ -85,6 +95,10 @@ function UserController($http,$scope,$routeParams) {
   function logout() {
     $http.get('/logout')
       .then(function(response) {
+        sharedservices.setWhoIsLoggedIn("");
+        localStorage.setItem('user_id',"");
+        localStorage.setItem('loggedIn',false);
+        sharedservices.loggedIn = false;
         window.location.assign(response.data.url);
       });
   }
@@ -106,10 +120,8 @@ function UserController($http,$scope,$routeParams) {
       });
   }
 
-  function setCurrGroup(group_id) {
-    $scope.currGroup = {};
-    $scope.currGroup.id = group_id;
+  function loginOrRegisterChange(value) {
+    $scope.loginOrRegister = value;
   }
-
 
 }

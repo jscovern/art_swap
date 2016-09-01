@@ -1,10 +1,11 @@
 angular.module('Art_Swap')
   .controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ["$http","$scope","$routeParams",'Upload',"$timeout"];
+ProfileController.$inject = ["$http","$scope","$routeParams",'Upload',"$timeout","sharedservices"];
 
-function ProfileController($http,$scope,$routeParams,Upload,$timeout) {
-	$scope.currentUser = {};
+function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservices) {
+	$scope.sharedservices = sharedservices;
+  $scope.currentUser = {};
   $scope.createGallery = createGallery;
   $scope.newGallery = {status: true};
   var today = new Date();
@@ -15,7 +16,8 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout) {
   $scope.createGroup = createGroup;
   $scope.newGroup ={created_on:$scope.today,status:true,active_users:[]};
   $scope.findMyGroups = findMyGroups;
-  $scope.setCurrGroup = setCurrGroup;
+  // $scope.createModalCarousel = createModalCarousel;
+  $scope.getWorksInGallery = getWorksInGallery;
 
   function getUserInfo() {
     var id = $routeParams.id;
@@ -149,12 +151,30 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout) {
     $http.get('/api/user/groups/'+id)
     .then(function(response) {
       $scope.myGroups = response.data;
+      console.log(response.data);
     });
   }
 
-  function setCurrGroup(group_id) {
-    $scope.currGroup = {};
-    $scope.currGroup.id = group_id;
+  function getWorksInGallery(gallery_id) {
+    $http.get('/api/gallery/'+gallery_id)
+      .then(function(response) {
+        $scope.carouselData = response.data;
+        console.log('ingetworksgallery');
+        console.log(response.data);
+        createModalCarousel();
+      });
+  }
+
+  function createModalCarousel() {
+    var currIndex = 0;
+    $scope.active = 0;
+    $scope.slides = [];
+    for (var i=0; i<$scope.carouselData.length; i++) {
+      $scope.addSlide(i);
+    }
+    $scope.addSlide = function(index) {
+      $scope.slides.push($scope.carouselData[i]);
+    };
   }
 
 }

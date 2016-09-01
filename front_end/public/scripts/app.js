@@ -1,4 +1,4 @@
 $(document).ready(function() {
 	// $('#chartCarousel').carousel();
 });
-angular.module('Art_Swap', ['ngRoute','ui.bootstrap','ngFileUpload']);
+angular.module('Art_Swap', ['ngRoute','ui.bootstrap','ngFileUpload','ui.bootstrap']);

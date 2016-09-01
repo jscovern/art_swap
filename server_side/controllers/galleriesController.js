@@ -62,8 +62,20 @@ function createWork(req,res) {
 	});
 }
 
+function getGallery(req,res) {
+	Gallery.findById({_id: req.params.id}, function(error,gallery) {
+		if(error) {
+			return res.json({message: "couldn't find the gallery b/c "+error});
+		} else {
+			return res.json(gallery);
+		}
+
+	});
+}
+
 
 module.exports = {
 createGallery: createGallery,
-createWork: createWork
+createWork: createWork,
+getGallery: getGallery
 };

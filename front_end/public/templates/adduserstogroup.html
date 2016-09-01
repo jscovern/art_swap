@@ -1,4 +1,7 @@
 <div class="col-md-6 col-md-offset-3" ng-controller="UserController" ng-init="getAllUsers()">
+  <div class="row">
+	  <a href="/#/mygroups/{{sharedservices.getWhoIsLoggedIn()}}" class="btn btn-success">Done Adding For Now!</a>
+  </div>
   <form class="">
       <label>Add Users to Group: <input placeholder="Start Typing Their Name..." ng-model="searchText"></label>
         <div id="userMatches">
