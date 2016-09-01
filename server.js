@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/art_swap");
 // start server
-app.listen(port, function() {
+app.listen(process.env.PORT || port, function() {
   console.log('Server started on', port); 
 });
 //routes setup
