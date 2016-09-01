@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
-var port = app.listen(process.env.PORT || 3000);
+var port = process.env.PORT || 3000;
 app.use(express.static('./front_end/public')); //this serves up the public folder into the root directory
 app.use(cookieParser());
 var bodyParser = require("body-parser");
