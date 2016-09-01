@@ -2,6 +2,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container">
 	    <ul class="nav navbar-nav">
+	    	<li><a href="/#/" class="glyphicon glyphicon-home" aria-hidden="true"></a></li>
 		    <li class=""><a href="/#/swaps/{{currentUser._id}}">Swaps</a></li>
 		    <li><a href="/#/mygroups/{{currentUser._id}}">Groups</a></li>
 		    <li ng-show="sharedservices.loggedIn()"><a ng-click="sharedservices.logout()">Logout</a></li>
@@ -18,13 +19,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="row"  ng-show="currentUser.img_url == ''"><button class="btn" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Add Profile Pic</button></div>
-		<div class="row"  ng-show="currentUser.img_url != ''"><button class="btn" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Edit Profile Pic</button></div>
+		<div class="row"  ng-show="currentUser.img_url == '' && sharedservices.canIUpdateProfile()"><button class="btn center-block" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Add Profile Pic</button></div>
+		<div class="row"  ng-show="currentUser.img_url != '' && sharedservices.canIUpdateProfile()"><button class="btn center-block" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Edit Profile Pic</button></div>
 		<div class="row">
 			<div id="username">{{currentUser.firstname}} {{currentUser.lastname}}</div>
 		</div>
 		<div class="row">
-			<div id="memberSince">Member Since: {{currentUser.join_date}} | date:'MM/dd/yyyy</div>
+			<div id="memberSince">Member Since: {{currentUser.join_date}}</div>
 		</div>
 <!-- 		<div class="row">
 			<div id="prevLikedWorkHeader">Previously Liked Works</div>
@@ -36,14 +37,14 @@
 
 	<div id="rightSide" class="col-md-10">
 		<div class="row">
-			<a class="btn btn-primary" href="/#/addGallery/{{currentUser._id}}">Add Gallery</a>
+			<a class="btn btn-primary" href="/#/addGallery/{{currentUser._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Gallery</a>
 		</div>
 		<div class="row" ng-repeat="gallery in currentUser.galleryDocs">
 			<div class="panel panel-info">
 				<div id="" class="col-md-12 panel-heading">
-					<h3 class="panel-title col-md-9">{{gallery.name}}</h3>
-					<button class="col-md-2 btn btn-success btn-md" ng-click="getWorksInGallery(gallery._id)">View Details</button>
-					<a class="col-md-1 btn btn-primary addWorkButton" href="/#/addWork/{{gallery._id}}">Add Work</a>
+					<h3 class="panel-title col-md-11">{{gallery.name}}</h3>
+<!-- 					<button class="col-md-2 btn btn-success btn-md" ng-click="getWorksInGallery(gallery._id)">View Details</button>
+ -->					<a class="col-md-1 btn btn-primary addWorkButton" href="/#/addWork/{{gallery._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Work</a>
 				</div>
 				<div class="panel-body">
 					<img ng-repeat="work in gallery.works" class="works" src="{{work.img_url}}">

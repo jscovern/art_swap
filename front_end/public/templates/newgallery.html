@@ -1,13 +1,18 @@
-<div class="col-md-6 col-md-offset-3" ng-controller="ProfileController">
-  <form ng-submit="createGallery()" class="">
-    <div>
-      <div class="form-group">
-      	<label for="name" class="">Gallery Name: </label>
-      	<input type="text" name="name" id="nameNewGallery" ng-model="newGallery.name" placeholder="Gallery Name" class="">
+<div class="wrapper homePage">
+  <h1 class="centerText">Create Your New Gallery</h1>
+  <div class="" id="" ng-controller="ProfileController">
+    <form ng-submit="createGallery()" class="form-signin loginContainer" id="">
+      <h2 class="form-signin-heading form-heading" id="">New Gallery</h2>
+      <div>
+        <div class="form-group">
+          <!-- <label for="email" class="">Email Address: </label> -->
+          <input type="text" name="name" id="nameNewGallery" placeholder="Gallery Name" class="form-control" ng-model="newGallery.name">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Create Gallery" class="btn btn-lg btn-primary btn-block">
+        </div>
       </div>
-      <div class="form-group">
-        <input type="submit" value="Create Gallery" class="btn">
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
+

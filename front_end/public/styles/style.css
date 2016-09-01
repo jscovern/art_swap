@@ -1,4 +1,4 @@
-#homePage{
+.homePage{
   background:url('../images/barnes_background.jpg');
   background-size:cover;
   position:relative;
@@ -10,7 +10,7 @@
   /*overflow-y: hidden;*/
 }
 
-#loginContainer {
+.loginContainer {
 	background-color:rgba(255, 255, 255, 0.2);
 }
 
@@ -73,6 +73,11 @@
 .preview{
 	height: 100px;
 	width: 100px;
+	border-radius: 50px;
+}
+
+#myGroupsContainer {
+	margin-top: 70px;
 }
 
 .userSearch {

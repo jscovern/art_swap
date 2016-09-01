@@ -1,13 +1,16 @@
-<div class="col-md-6 col-md-offset-3" ng-controller="ProfileController">
-  <form ng-submit="createGroup()" class="">
-    <div>
-      <div class="form-group">
-      	<label for="name" class="">Group Name: </label>
-      	<input type="text" name="name" id="nameNewGroup" ng-model="newGroup.name" placeholder="Group Name" class="">
+<div class="wrapper homePage">
+  <h1 class="centerText">Create Your New Group to Share With</h1>
+  <div class="" id="" ng-controller="ProfileController">
+    <form ng-submit="createGroup()" class="form-signin loginContainer" id="">
+      <h2 class="form-signin-heading form-heading" id="">New Group</h2>
+      <div>
+        <div class="form-group">
+          <input type="text" name="name" id="nameNewGroup" placeholder="Group Name" class="form-control" ng-model="newGroup.name">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Create Group" class="btn btn-lg btn-primary btn-block">
+        </div>
       </div>
-      <div class="form-group">
-        <input type="submit" value="New Group" class="btn">
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

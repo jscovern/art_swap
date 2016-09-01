@@ -7,10 +7,18 @@
   </div>
 </nav>
 
-<div class="container" ng-controller="ProfileController" ng-init="getUserInfo()">
-	<a class="btn btn-success" href="/#/groups/new/{{currentUser._id}}">Add a Group</a>
+<div class="container" id="myGroupsContainer" ng-controller="ProfileController" ng-init="getUserInfo()">
+	<a class="btn btn-success" href="/#/groups/new/{{currentUser._id}}" ng-show="sharedservices.canIUpdateProfile()">Create a Group to Share With!</a>
 </div>
 
 <div class="container" ng-controller="ProfileController" ng-init="findMyGroups()">
-	<div ng-repeat="group in myGroups"><a href="/#/addToGroup/{{group._id}}" class="btn btn-primary">{{group.name}}</a><p ng-repeat="user in group.active_users"><a href="/#/profile/{{user._id}}">{{user.firstname}} {{user.lastname}} <img class="preview" ng-src="{{user.img_url}}"></a></div>
+	<div ng-repeat="group in myGroups">
+		<div class='row'>
+			<a href="/#/addToGroup/{{group._id}}" class="btn btn-primary col-md-4 col-md-offset-4">Add Fellow Artists To: {{group.name}}</a>
+		</div>
+			<p ng-repeat="user in group.active_users" class="col-md-offset-1 col-md-3">
+				<img class="preview" ng-src="{{user.img_url}}">
+				<a href="/#/profile/{{user._id}}">{{user.firstname}} {{user.lastname}}</a>
+			</p>
+	</div>
 </div>

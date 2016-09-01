@@ -26,6 +26,7 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
         $scope.currentUser = response.data.user;
         $scope.currentUser.galleryDocs = response.data.usergalleries;
       });
+      sharedservices.canIUpdateProfile();
   }
   // getUserInfo();
 

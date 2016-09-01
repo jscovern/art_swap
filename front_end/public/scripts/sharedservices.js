@@ -1,6 +1,6 @@
 angular.module('Art_Swap')
-	.service('sharedservices', function($http) {
-		this.$inject=["$http"];
+	.service('sharedservices', function($http,$routeParams) {
+		this.$inject=["$http","$routeParams"];
 		var whoIsLoggedIn = "";
 		var self=this;
 			
@@ -25,5 +25,16 @@ angular.module('Art_Swap')
 						window.location.assign(response.data.url);
 					});
 			};
+
+			this.canIUpdateProfile=function() {
+				var user_id = $routeParams.id;
+				console.log("user_id: "+user_id);
+				console.log("whoIsLoggedIn: "+whoIsLoggedIn);
+				return user_id == whoIsLoggedIn;
+			};
+
+			this.canIUpdateGroup = function() {
+				var user_id = $routeParams.id;
+			}
 		return this;
 	});
