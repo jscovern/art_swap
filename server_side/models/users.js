@@ -21,5 +21,5 @@ UserSchema.statics.hashPassword = function(password, cb){
 UserSchema.methods.validatePassword = function(password, cb){
     bcrypt.compare(password, this.password, cb);
 };
-UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(passportLocalMongoose,{usernameField: "email"});
 module.exports = mongoose.model('User', UserSchema);
