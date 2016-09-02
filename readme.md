@@ -14,6 +14,13 @@ This is my art swapping app.  The thought behind it is that there are a lot of a
 
 This project is still very much a work in progress.  Any questions, feel free to contact me at jamie.scovern@gmail.com
 
+Mockups:
+<img src="mockup_login.png">
+<img src="mockup_profile.png">
+<img src="mockup_proposed.png">
+<img src="mockup_groups.png">
+<img src="mockup_swaps.png">
+
 Screenshots:
 
 Login Screen:
