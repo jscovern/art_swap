@@ -2,19 +2,15 @@
 <html>
 <head>
 	<title>Art Swap!</title>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Tamma" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.2.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.2.js"></script>
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script> -->
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script> -->
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css"> -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
     <link rel="stylesheet" href="styles/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="scripts/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
@@ -25,6 +21,20 @@
     <script src="scripts/sharedservices.js"></script>
 </head>
 <body ng-app="Art_Swap">
+    <div class="row" ng-controller="ProfileController" ng-show="sharedservices.currentPath() != '/' && sharedservices.currentPath() != '/login' && sharedservices.currentPath() != '/register'">
+    <nav class="navbar navbar-default navbar-fixed-top" ng-init="getUserInfo()">
+      <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="/#/" class="glyphicon glyphicon-home" aria-hidden="true"></a></li>
+            <li ng-show="sharedservices.loggedIn()"><a href="/#/profile/{{sharedservices.getWhoIsLoggedIn()}}" class="glyphicon glyphicon-user" aria-hidden="true"></a></li>
+            <li ng-show="sharedservices.loggedIn()" class=""><a href="/#/usersToSwapWith">Swap with Friends</a></li>
+            <li ng-show="sharedservices.loggedIn()" class=""><a href="/#/swaps/{{sharedservices.getWhoIsLoggedIn()}}">Swaps</a></li>
+            <!-- <li><a href="/#/mygroups/{{currentUser._id}}">Groups</a></li> -->
+            <li ng-show="sharedservices.loggedIn()"><a href="#" ng-click="sharedservices.logout()">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+</div>
 		<div ng-view></div>
 </body>
 </html>

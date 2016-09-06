@@ -57,8 +57,13 @@
 }
 
 .works {
-	height: 200px;
-	width: 200px;
+	height: 300px;
+	width: 300px;
+	margin: 0 auto;
+}
+
+.slides_control {
+	height: 100%;
 }
 
 .nav {
@@ -66,8 +71,9 @@
 }
 
 .searchPreview{
-	height: 100px;
-	width: 100px;
+	height: 250px;
+	width: 250px;
+	border-radius: 125px;
 }
 
 .preview{
@@ -76,26 +82,44 @@
 	border-radius: 50px;
 }
 
-#myGroupsContainer {
+/*#myGroupsContainer {
 	margin-top: 70px;
 }
-
+*/
 .userSearch {
-	/*border: 1px solid black;*/
+	height: 300px;
+	width: 300px;
+  	background-size: cover;
+  	margin: 10px 0 0 10px;
+  	position: relative;
 	margin-bottom: 5px;
 	text-align: center;
+	border-radius: 200px;
+}
+
+/*.userSearch:hover {
+	background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)) !important;
+}
+*/
+.overlayOnPic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.5rem;
+  transform: translate(-50%, -50%);
 }
 
 #userMatches {
-	border: 1px solid grey;
+	/*border: 1px solid grey;*/
 }
 
 .userSearch:hover {
 	cursor: pointer;
-}
-
-.centerText {
-	text-align: center;
 }
 
 h1 {
@@ -104,7 +128,7 @@ h1 {
 	margin: 40px;
 }
 
-#profileShowContainer {
+#profileShowContainer, #workShowContainer {
 	margin-top: 65px;
 }
 
@@ -114,10 +138,6 @@ h1 {
 	margin-top: 7px;
 	padding: 2px;
 	border: 1px solid lightgrey;
-}
-
-.addWorkButton{
-	text-align: center;
 }
 
 .panel-heading {
@@ -130,4 +150,47 @@ h1 {
 
 .panel-body {
 	padding: 7px;
+}
+
+.carousel-control.left, .carousel-control.right {
+	background-image: none;
+	color: black;
+}
+
+.galleryTitle {
+	font-family: 'Baloo Tamma', cursive;
+}
+
+.sr-only {
+	display: none;
+}
+
+nav {
+	font-family: 'Prompt', sans-serif;
+}
+
+.workShowRight img{
+	max-width: 100%;
+	max-height: 100%;
+	/*display: inline-block;*/
+	/*margin: 0 auto;*/
+	vertical-align: middle;
+	/*position: relative;*/
+	/*top: 50%;*/
+}
+
+.workShowRight {
+	background-color: grey;
+	height: 100vh;
+	/*position: absolute;*/
+}
+
+.workShowGutter {
+	background-color: grey;
+	height: 100vh;
+}
+
+.workShowLeft {
+	background-color: lightgrey;
+	height: 100vh;
 }

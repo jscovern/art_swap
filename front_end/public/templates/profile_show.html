@@ -1,15 +1,3 @@
-<div class="row" ng-controller="ProfileController" ng-init="getUserInfo()">
-	<nav class="navbar navbar-default navbar-fixed-top">
-	  <div class="container">
-	    <ul class="nav navbar-nav">
-	    	<li><a href="/#/" class="glyphicon glyphicon-home" aria-hidden="true"></a></li>
-		    <li class=""><a href="/#/swaps/{{currentUser._id}}">Swaps</a></li>
-		    <li><a href="/#/mygroups/{{currentUser._id}}">Groups</a></li>
-		    <li ng-show="sharedservices.loggedIn()"><a ng-click="sharedservices.logout()">Logout</a></li>
-	    </ul>
-	  </div>
-	</nav>
-</div>
 <div class="container" id="profileShowContainer" ng-controller="ProfileController" ng-init="getUserInfo()">
 	<div id="leftSide" class="col-md-2">
 		<div class="row">
@@ -37,35 +25,39 @@
 
 	<div id="rightSide" class="col-md-10">
 		<div class="row">
-			<a class="btn btn-primary" href="/#/addGallery/{{currentUser._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Gallery</a>
+			<a class="btn btn-primary col-md-6 col-md-offset-3" href="/#/addGallery/{{currentUser._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Gallery</a>
 		</div>
-		<div class="row" ng-repeat="gallery in currentUser.galleryDocs">
+		<div class="slides_control col-md-5 col-md-offset-1" ng-repeat="gallery in currentUser.galleryDocs">
+			<div class="">
+				<h2 class="galleryTitle text-center">{{gallery.name}}</h2>
+			</div>
+			<div uib-carousel class="" no-wrap="noWrapSlides" interval="carouselInterval" id="carousel{{$index}}">
+				<div class="carousel-inner">
+					<div uib-slide ng-repeat="slide in gallery.works track by $index" index="$index">
+						<a href="/#/work/{{slide._id}}">
+							<img class="works" ng-src="{{slide.img_url}}">
+							<div class="carousel-caption">
+								<h4>{{slide.name}}</h4>
+							</div>
+						</a>
+						<a ng-show="gallery.works.length > 1" class="carousel-control left" href="#carousel{{$index}}" data-slide="prev"></a>
+						<a ng-show="gallery.works.length > 1" class="carousel-control right" href="#carousel{{$index}}" data-slide="next"></a>
+					</div>
+				</div>
+			</div>
+			<a class="btn btn-primary col-md-8 col-md-offset-2" href="/#/addWork/{{gallery._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Work</a>
+		</div>
+		<!-- <div class="row" ng-repeat="gallery in currentUser.galleryDocs">
 			<div class="panel panel-info">
 				<div id="" class="col-md-12 panel-heading">
 					<h3 class="panel-title col-md-11">{{gallery.name}}</h3>
-<!-- 					<button class="col-md-2 btn btn-success btn-md" ng-click="getWorksInGallery(gallery._id)">View Details</button>
- -->					<a class="col-md-1 btn btn-primary addWorkButton" href="/#/addWork/{{gallery._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Work</a>
+					<button class="col-md-2 btn btn-success btn-md" ng-click="getWorksInGallery(gallery._id)">View Details</button>
+					<a class="col-md-1 btn btn-primary addWorkButton" href="/#/addWork/{{gallery._id}}" ng-show="sharedservices.canIUpdateProfile()">Add Work</a>
 				</div>
 				<div class="panel-body">
 					<img ng-repeat="work in gallery.works" class="works" src="{{work.img_url}}">
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
-
-<!-- <div class="container" ng-repeat="gallery in currentUser.galleryDocs">
-  <div class="row">
-    <div uib-carousel no-wrap="noWrapSlides" id="galleryCarousel{{$index}}">
-      <div class="carousel-inner">
-        <div uib-slide ng-repeat="slide in gallery.works track by slide.id" index="slide.id">
-          <div class="carousel-caption">
-            <h2>{{slide.name}} </h2><p>{{slide.month}} {{slide.year}}; ${{slide.approximate_value}}</p>
-            <p>{{slide.description}}</p>
-          </div>
-          <img src={{slide.img_url}}>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->

@@ -30,5 +30,6 @@ router.get('/api/user/groups/:id',groupsController.getMyGroups);
 router.get('/api/users',usersController.allUsers);
 router.post('/api/usersingroup/new', groupsController.addUserToGroup);
 router.get('/api/gallery/:id', galleriesController.getGallery);
+router.get('/api/work/:id', galleriesController.getWork);
 return router;
 };

@@ -1,0 +1,15 @@
+<div id="workShowContainer" ng-controller="ProfileController" ng-init="getWorkInfo()">
+	<ul class="col-md-3 list-unstyled workShowLeft">
+		<li class="row">{{currentWork.name}}</li>
+		<li class="row">Approximate Date: </li>
+		<li class="row">  {{currentWork.month}} {{currentWork.year}}</li>
+		<li class="row">{{currentWork.description}}</li>
+		<li class="row">Approximate Value:</li>
+		<li class="row">${{currentWork.approximate_value}}</li>
+	</ul>
+	<div class="col-md-1 workShowGutter"></div>
+	<div class="col-md-7 workShowRight">
+		<img class="text-center" ng-src="{{currentWork.img_url}}">
+	</div>
+	<div class="col-md-1 workShowGutter"></div>
+</div>

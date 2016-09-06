@@ -1,0 +1,18 @@
+<div class="col-md-6 col-md-offset-3" ng-controller="UserController">
+</div>
+<div id="userMatches" ng-controller="UserController" ng-init="getAllUsers()" class="col-md-12">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="">
+          <label>Who would you like to swap with?: 
+            <input placeholder="Start Typing Their Name..." ng-model="searchText">
+          </label>
+      </form>
+    </div>
+  </div>
+  <div class="userSearch col-md-4" ng-repeat="user in allUsers | filter:searchText" ng-style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url({{user.img_url}})'}">
+    <a href="/#/profile/{{user._id}}" class="overlayOnPic">{{user.firstname}} {{user.lastname}}
+<!--       <img src="{{user.img_url}}" class="searchPreview">
+ -->    </a>
+  </div>
+</div>

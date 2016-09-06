@@ -13,27 +13,27 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
   $scope.newWork = {added_on:$scope.today, swappable: true};
   $scope.createWorkInGallery = createWorkInGallery;
   $scope.getUserInfo = getUserInfo;
-  $scope.createGroup = createGroup;
-  $scope.newGroup ={created_on:$scope.today,status:true,active_users:[]};
-  $scope.findMyGroups = findMyGroups;
-  // $scope.createModalCarousel = createModalCarousel;
-  $scope.getWorksInGallery = getWorksInGallery;
+  $scope.getWorkInfo = getWorkInfo;
+  // $scope.createGroup = createGroup;
+  // $scope.newGroup ={created_on:$scope.today,status:true,active_users:[]};
+  // $scope.findMyGroups = findMyGroups;
+  $scope.carouselInterval = 6000;
 
   function getUserInfo() {
     var id = $routeParams.id;
-    $http.get('/api/user/'+id)
-      .then(function(response) {
-        $scope.currentUser = response.data.user;
-        $scope.currentUser.galleryDocs = response.data.usergalleries;
-      });
-      sharedservices.canIUpdateProfile();
+    if(id) { //only run the get if actually on a users page - home page doesn't have an id etc..
+      $http.get('/api/user/'+id)
+        .then(function(response) {
+          $scope.currentUser = response.data.user;
+          $scope.currentUser.galleryDocs = response.data.usergalleries;
+        });
+        sharedservices.canIUpdateProfile();
+    }
   }
   // getUserInfo();
 
   $scope.uploadFiles = function(file, errFiles) {
     var reader = new FileReader();
-    console.log('file is: ');
-    console.dir(file);
     $scope.f = file;
     $scope.errFile = errFiles && errFiles[0];
     if (file) {
@@ -65,8 +65,6 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
 
   $scope.uploadWorkFiles = function(file, errFiles) {
     var reader = new FileReader();
-    console.log('file is: ');
-    console.dir(file);
     $scope.f = file;
     $scope.errFile = errFiles && errFiles[0];
     if (file) {
@@ -96,19 +94,14 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
   };
 
   function updateProfileImage(user) {
-    console.log('in the updateprofileimage, user._id is'+user._id);
     $http.put('/api/user/edit/'+user._id,user)
       .then(function(response) {
-        console.log('in the then after putting the new image');
-        console.dir(response);
       });
   }
 
   function createGallery() {
     $http.post('/api/gallery/new',$scope.newGallery)
       .then(function(response) {
-        console.log('in the then after post, response is: ');
-        console.dir(response);
         window.location.assign(response.data.url);
       });
   }
@@ -135,47 +128,34 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
     return formatted;
   }
 
-  function createGroup() {
+  function getWorkInfo() {
     var id = $routeParams.id;
-    $scope.newGroup.created_by = id;
-    $scope.newGroup.active_users.push(id);
-    console.dir($scope.newGroup);
-    $http.post('/api/group/new/'+id,$scope.newGroup)
+    $http.get('/api/work/'+id)
       .then(function(response) {
-        window.location.assign(response.data.url);
+        $scope.currentWork = response.data.work;
       });
   }
 
-  function findMyGroups() {
-    var id = $routeParams.id;
-    console.log('in the findmygroups');
-    $http.get('/api/user/groups/'+id)
-    .then(function(response) {
-      $scope.myGroups = response.data;
-      console.log(response.data);
-    });
-  }
 
-  function getWorksInGallery(gallery_id) {
-    $http.get('/api/gallery/'+gallery_id)
-      .then(function(response) {
-        $scope.carouselData = response.data;
-        console.log('ingetworksgallery');
-        console.log(response.data);
-        createModalCarousel();
-      });
-  }
+//groups has been sidelined until a future date. keeping code in case needed later.
+  // function createGroup() {
+  //   var id = $routeParams.id;
+  //   $scope.newGroup.created_by = id;
+  //   $scope.newGroup.active_users.push(id);
+  //   console.dir($scope.newGroup);
+  //   $http.post('/api/group/new/'+id,$scope.newGroup)
+  //     .then(function(response) {
+  //       window.location.assign(response.data.url);
+  //     });
+  // }
 
-  function createModalCarousel() {
-    var currIndex = 0;
-    $scope.active = 0;
-    $scope.slides = [];
-    for (var i=0; i<$scope.carouselData.length; i++) {
-      $scope.addSlide(i);
-    }
-    $scope.addSlide = function(index) {
-      $scope.slides.push($scope.carouselData[i]);
-    };
-  }
-
+  // function findMyGroups() {
+  //   var id = $routeParams.id;
+  //   console.log('in the findmygroups');
+  //   $http.get('/api/user/groups/'+id)
+  //   .then(function(response) {
+  //     $scope.myGroups = response.data;
+  //     console.log(response.data);
+  //   });
+  // }
 }

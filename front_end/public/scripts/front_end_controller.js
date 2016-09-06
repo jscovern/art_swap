@@ -23,16 +23,33 @@ angular.module('Art_Swap')
     .when('/addWork/:id', {
       templateUrl: "/templates/new_work.html"
     })
-    .when('/mygroups/:id', {
-      templateUrl: "/templates/my_groups.html"
+    .when('/work/:id', {
+      templateUrl: "/templates/work_show.html"
     })
-    .when('/groups/new/:id', {
-      templateUrl: "/templates/new_group.html"
-    })
-    .when('/addToGroup/:id', {
-      templateUrl: "/templates/adduserstogroup.html"
+    // .when('/mygroups/:id', {
+    //   templateUrl: "/templates/my_groups.html"
+    // })
+    // .when('/groups/new/:id', {
+    //   templateUrl: "/templates/new_group.html"
+    // })
+    // .when('/addToGroup/:id', {
+    //   templateUrl: "/templates/adduserstogroup.html"
+    // })
+    .when('/usersToSwapWith', {
+      templateUrl: "/templates/usersToSwapWith.html"
     });
   });
+  // .directive('backgroundUrl', function(){
+  //   console.log('in the directive');
+  //   return function(scope, element, attrs) {
+  //   console.log('attrs.backgroundUrl '+attrs.backgroundUrl);
+
+  //     var url = attrs.backgroundUrl;
+  //     element.css({
+  //       'background' : 'url('+url+')'
+  //     });
+  //   };
+  
 
 UserController.$inject = ["$http","$scope","$routeParams","sharedservices"];
 
@@ -40,8 +57,6 @@ function UserController($http,$scope,$routeParams,sharedservices) {
   $scope.sharedservices = sharedservices;
   $scope.message = "";
   $scope.errorMessage = "";
-	$scope.loginOrRegister = "login";
-  $scope.loginOrRegisterChange = loginOrRegisterChange;
   $scope.login = login;
 	$scope.createNewUser = createNewUser;
   $scope.logout = logout;
@@ -50,10 +65,9 @@ function UserController($http,$scope,$routeParams,sharedservices) {
   $scope.newUser = {admin_user: false, join_date: $scope.today, img_url: ""};
   $scope.loginUser = {};
   $scope.getAllUsers = getAllUsers;
-  $scope.addUserToGroup = addUserToGroup;
+  // $scope.addUserToGroup = addUserToGroup;
 
 	function createNewUser() {
-    console.log('in createNewUser front_end');
     $http.post('/register',$scope.newUser)
       .then(function(response) {
         if(!response.data.error) {
@@ -87,7 +101,6 @@ function UserController($http,$scope,$routeParams,sharedservices) {
         sharedservices.setWhoIsLoggedIn(response.data.user._id);
         localStorage.setItem('user_id',response.data.user._id);
         localStorage.setItem('loggedIn',true);
-        console.log(sharedservices.loggedIn());
         window.location.assign(response.data.url);
       });
   }
@@ -109,19 +122,13 @@ function UserController($http,$scope,$routeParams,sharedservices) {
         $scope.allUsers = response.data;
       });
   }
-
-  function addUserToGroup(user_id) {
-    group_id = $routeParams.id;
-    var postData = {group_id: group_id, user_id: user_id};
-    console.dir(postData);
-    $http.post('/api/usersingroup/new', postData)
-      .then(function(response) {
-        console.log(response.data);
-      });
-  }
-
-  function loginOrRegisterChange(value) {
-    $scope.loginOrRegister = value;
-  }
+//groups have been sidelined until later development.
+  // function addUserToGroup(user_id) {
+  //   group_id = $routeParams.id;
+  //   var postData = {group_id: group_id, user_id: user_id};
+  //   $http.post('/api/usersingroup/new', postData)
+  //     .then(function(response) {
+  //     });
+  // }
 
 }
