@@ -19,6 +19,7 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
   // $scope.findMyGroups = findMyGroups;
   $scope.carouselInterval = 6000;
   $scope.likeThisWork = likeThisWork;
+  $scope.findMySwaps = findMySwaps;
 
   function getUserInfo() {
     var id = $routeParams.id;
@@ -146,6 +147,14 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
     $http.post('/api/likethiswork/'+work_id, user_id)
       .then(function(response) {
         console.log(response);
+      });
+  }
+
+  function findMySwaps() {
+    $http.get('/api/myswaps/'+sharedservices.getWhoIsLoggedIn())
+      .then(function(response) {
+        $scope.mySwaps = response.data;
+        console.dir($scope.mySwaps);
       });
   }
 

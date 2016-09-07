@@ -17,6 +17,9 @@ angular.module('Art_Swap')
       templateUrl: "/templates/profile_show.html",
       controller: "UserController"
     })
+    .when('/swaps/:id', {
+      templateUrl: "/templates/my_swaps.html"
+    })
     .when('/addGallery/:id', {
       templateUrl: "/templates/newgallery.html"
     })

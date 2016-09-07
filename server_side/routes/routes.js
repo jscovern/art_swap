@@ -33,5 +33,6 @@ router.post('/api/usersingroup/new', groupsController.addUserToGroup);
 router.get('/api/gallery/:id', galleriesController.getGallery);
 router.get('/api/work/:id', galleriesController.getWork);
 router.post('/api/likethiswork/:id',swapsController.likeThisWork);
+router.get('/api/myswaps/:id',swapsController.getMySwaps);
 return router;
 };
