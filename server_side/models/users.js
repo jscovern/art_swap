@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var Gallery = require("./galleries.js").schema;
+var Work = require("./works.js").schema;
 var Schema = mongoose.Schema;
 
 var UserSchema = mongoose.Schema({
@@ -13,7 +14,8 @@ var UserSchema = mongoose.Schema({
 	firstname: {type: String, required: true},
 	lastname: {type: String, required: true},
 	img_url: {type: String, required: false},
-	galleries: [{type: Schema.Types.ObjectId,ref: 'Gallery'}]
+	galleries: [{type: Schema.Types.ObjectId,ref: 'Gallery'}],
+	liked_works: [{type: Schema.Types.ObjectId, ref:'Work'}]
 });
 UserSchema.statics.hashPassword = function(password, cb){
     bcrypt.hash(password, null, null, cb);

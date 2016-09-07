@@ -10,7 +10,7 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
   $scope.newGallery = {status: true};
   var today = new Date();
   $scope.today = formatDate(today);  
-  $scope.newWork = {added_on:$scope.today, swappable: true};
+  $scope.newWork = {added_on:$scope.today, swappable: true, liked_by: []};
   $scope.createWorkInGallery = createWorkInGallery;
   $scope.getUserInfo = getUserInfo;
   $scope.getWorkInfo = getWorkInfo;
@@ -18,6 +18,7 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
   // $scope.newGroup ={created_on:$scope.today,status:true,active_users:[]};
   // $scope.findMyGroups = findMyGroups;
   $scope.carouselInterval = 6000;
+  $scope.likeThisWork = likeThisWork;
 
   function getUserInfo() {
     var id = $routeParams.id;
@@ -133,6 +134,18 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
     $http.get('/api/work/'+id)
       .then(function(response) {
         $scope.currentWork = response.data.work;
+      });
+  }
+
+  function likeThisWork() {
+    console.log('in likethiswork');
+    var work_id = $routeParams.id;
+    console.log('work_id is: '+work_id);
+    var user_id = {user_id: sharedservices.getWhoIsLoggedIn()};
+    console.log('user_id: '+user_id);
+    $http.post('/api/likethiswork/'+work_id, user_id)
+      .then(function(response) {
+        console.log(response);
       });
   }
 

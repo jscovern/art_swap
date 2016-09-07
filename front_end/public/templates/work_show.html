@@ -1,15 +1,16 @@
 <div id="workShowContainer" ng-controller="ProfileController" ng-init="getWorkInfo()">
-	<ul class="col-md-3 list-unstyled workShowLeft">
-		<li class="row">{{currentWork.name}}</li>
-		<li class="row">Approximate Date: </li>
-		<li class="row">  {{currentWork.month}} {{currentWork.year}}</li>
-		<li class="row">{{currentWork.description}}</li>
-		<li class="row">Approximate Value:</li>
-		<li class="row">${{currentWork.approximate_value}}</li>
-	</ul>
+	<div class="workShowLeft col-md-3">
+		<ul class="list-unstyled">
+			<li class="row workName standardFont"><h2>{{currentWork.name}}</h2></li>
+			<li class="row workDate standardFont">{{currentWork.month}} {{currentWork.year}}</li>
+			<li class="row workDescription standardFont">{{currentWork.description}}</li>
+			<li class="row workValue standardFont">Approximate Value: ${{currentWork.approximate_value}}</li>
+		</ul>
+		<button ng-click="likeThisWork()" class="btn btn-default center-block">Like This Work</button>
+	</div>
 	<div class="col-md-1 workShowGutter"></div>
-	<div class="col-md-7 workShowRight">
-		<img class="text-center" ng-src="{{currentWork.img_url}}">
+	<div class="col-md-7 workShowRight text-center">
+		<div id="imageWrap"><img class="" ng-src="{{currentWork.img_url}}"></div>
 	</div>
 	<div class="col-md-1 workShowGutter"></div>
 </div>

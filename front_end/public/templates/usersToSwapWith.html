@@ -1,18 +1,17 @@
-<div class="col-md-6 col-md-offset-3" ng-controller="UserController">
-</div>
-<div id="userMatches" ng-controller="UserController" ng-init="getAllUsers()" class="col-md-12">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form class="">
-          <label>Who would you like to swap with?: 
-            <input placeholder="Start Typing Their Name..." ng-model="searchText">
-          </label>
-      </form>
+<div class="" id="userSwapContainer">
+  <div id="userMatches" ng-controller="UserController" ng-init="getAllUsers()" class="col-md-12">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h3 id="userSwapTitle" class="text-center standardFont">Who would you like to swap with? </h3>
+        <form class="center-block">
+            <input class="center-block form-control" placeholder="Start Typing Their Name..." ng-model="searchText">
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="userSearch col-md-4" ng-repeat="user in allUsers | filter:searchText" ng-style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url({{user.img_url}})'}">
-    <a href="/#/profile/{{user._id}}" class="overlayOnPic">{{user.firstname}} {{user.lastname}}
-<!--       <img src="{{user.img_url}}" class="searchPreview">
- -->    </a>
+    <div class="userSearch col-md-4" ng-repeat="user in allUsers | filter:searchText" ng-style="{'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url({{user.img_url}})'}">
+      <a href="/#/profile/{{user._id}}" class="overlayOnPic standardFont">{{user.firstname}} {{user.lastname}}
+  <!--       <img src="{{user.img_url}}" class="searchPreview">
+   -->    </a>
+    </div>
   </div>
 </div>

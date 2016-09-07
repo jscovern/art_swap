@@ -62,7 +62,7 @@ function UserController($http,$scope,$routeParams,sharedservices) {
   $scope.logout = logout;
   var today = new Date();
   $scope.today = formatDate(today);
-  $scope.newUser = {admin_user: false, join_date: $scope.today, img_url: ""};
+  $scope.newUser = {admin_user: false, join_date: $scope.today, img_url: "", liked_works: []};
   $scope.loginUser = {};
   $scope.getAllUsers = getAllUsers;
   // $scope.addUserToGroup = addUserToGroup;

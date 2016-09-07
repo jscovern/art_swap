@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var User = require("./users.js").schema;
+var Schema = mongoose.Schema;
+
 var WorkSchema = mongoose.Schema({
 	name: {type: String, required: true},
   	description: {type: String, required: true},
@@ -7,6 +10,7 @@ var WorkSchema = mongoose.Schema({
   	approximate_value: {type: Number, required: true},
   	img_url: {type: String},
   	added_on: {type: Date},
-  	swappable: {type: Boolean}
+  	swappable: {type: Boolean},
+  	liked_by: [{type: Schema.Types.ObjectId,ref: 'User'}]
 });
 module.exports = mongoose.model('Work', WorkSchema);

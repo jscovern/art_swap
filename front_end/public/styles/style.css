@@ -46,14 +46,15 @@
   padding: 10px;
 }
 
-#profilePicContainer {
+.leftSidePicContainer {
 	border: 1px solid black;
-	height: 200px;
+	margin-left: 20px;
+	margin-top: 20px;
 }
 
-#profilePic {
-	height: 200px;
-	width: 200px;
+.leftSidePic {
+	height: 100%;
+	width: 100%;
 }
 
 .works {
@@ -64,6 +65,7 @@
 
 .slides_control {
 	height: 100%;
+	display: block;
 }
 
 .nav {
@@ -82,10 +84,6 @@
 	border-radius: 50px;
 }
 
-/*#myGroupsContainer {
-	margin-top: 70px;
-}
-*/
 .userSearch {
 	height: 300px;
 	width: 300px;
@@ -97,12 +95,7 @@
 	border-radius: 200px;
 }
 
-/*.userSearch:hover {
-	background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)) !important;
-}
-*/
 .overlayOnPic {
-  font-family: 'Roboto', sans-serif;
   font-weight: 900;
   color: white;
   text-transform: uppercase;
@@ -114,22 +107,23 @@
   transform: translate(-50%, -50%);
 }
 
-#userMatches {
-	/*border: 1px solid grey;*/
-}
-
-.userSearch:hover {
-	cursor: pointer;
-}
-
 h1 {
 	font-size: 3.5em;
 	color: white;
 	margin: 40px;
 }
 
-#profileShowContainer, #workShowContainer {
-	margin-top: 65px;
+#profileShowContainer, #workShowContainer, #userSwapContainer {
+	margin-top: 61px;
+}
+
+
+#workShowContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .works {
@@ -158,7 +152,11 @@ h1 {
 }
 
 .galleryTitle {
-	font-family: 'Baloo Tamma', cursive;
+	font-weight: 500;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 17px;
+	padding-bottom: 7px;
 }
 
 .sr-only {
@@ -169,28 +167,85 @@ nav {
 	font-family: 'Prompt', sans-serif;
 }
 
+#imageWrap {
+	display:table-cell;
+	vertical-align:middle;
+}
+
 .workShowRight img{
 	max-width: 100%;
-	max-height: 100%;
-	/*display: inline-block;*/
-	/*margin: 0 auto;*/
-	vertical-align: middle;
-	/*position: relative;*/
-	/*top: 50%;*/
+	max-height: 100vh;
+	margin: 0 auto;
 }
 
 .workShowRight {
-	background-color: grey;
-	height: 100vh;
-	/*position: absolute;*/
+	background-color: rgb(68,68,68);
+	min-height: 100vh;
+	display: table;
+	background-size: cover;
+	overflow-y: auto;
 }
 
 .workShowGutter {
-	background-color: grey;
+	background-color: rgb(68,68,68);
 	height: 100vh;
 }
 
 .workShowLeft {
-	background-color: lightgrey;
+	background-color: rgb(51,51,51);
 	height: 100vh;
+	color: white;
+}
+
+.workName {
+	margin-left: 10px;
+}
+
+.workDate, .workDescription, .workValue {
+	margin-left: 40px;
+}
+
+#userSwapTitle {
+	color: black;
+}
+
+#profileShowContainer, #userSwapContainer {
+	min-height: 100vh;
+	background-size:cover;
+	background-color: rgb(255, 245, 224);
+	overflow-y: auto;
+}
+
+#leftSide {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#rightSide {
+	/*min-height: 100vh;*/
+}
+
+.addWorkButton {
+	margin-top: 5px;
+}
+
+.profilePicButton {
+	margin-top: 5px;
+}
+
+#addGalleryButton {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.btn {
+	font-family: 'Roboto Mono', monospace;
+}
+
+.standardFont {
+	font-family: 'Roboto Mono', monospace;	
+}
+
+input {
+	font-family: 'Roboto Mono', monospace;	
 }

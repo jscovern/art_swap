@@ -4,6 +4,7 @@ var express = require('express'),
 var usersController = require('../controllers/usersController');
 var galleriesController = require('../controllers/galleriesController');
 var groupsController = require('../controllers/groupsController');
+var swapsController = require('../controllers/swapsController');
 var isAuth = function (req, res, next) {
   console.log('in isauth');
   console.log(req);
@@ -31,5 +32,6 @@ router.get('/api/users',usersController.allUsers);
 router.post('/api/usersingroup/new', groupsController.addUserToGroup);
 router.get('/api/gallery/:id', galleriesController.getGallery);
 router.get('/api/work/:id', galleriesController.getWork);
+router.post('/api/likethiswork/:id',swapsController.likeThisWork);
 return router;
 };
