@@ -11,6 +11,7 @@ var WorkSchema = mongoose.Schema({
   	img_url: {type: String},
   	added_on: {type: Date},
   	swappable: {type: Boolean},
-  	liked_by: [{type: Schema.Types.ObjectId,ref: 'User'}]
+  	liked_by: [{type: Schema.Types.ObjectId,ref: 'User'}],
+  	created_by: {type: Schema.Types.ObjectId,ref: 'User'}
 });
 module.exports = mongoose.model('Work', WorkSchema);

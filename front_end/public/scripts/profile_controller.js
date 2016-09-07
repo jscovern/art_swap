@@ -1,9 +1,9 @@
 angular.module('Art_Swap')
   .controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ["$http","$scope","$routeParams",'Upload',"$timeout","sharedservices"];
+ProfileController.$inject = ["$http","$scope","$routeParams",'Upload',"$timeout","sharedservices","$window"];
 
-function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservices) {
+function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservices,$window) {
 	$scope.sharedservices = sharedservices;
   $scope.currentUser = {};
   $scope.createGallery = createGallery;
@@ -148,7 +148,6 @@ function ProfileController($http,$scope,$routeParams,Upload,$timeout,sharedservi
         console.log(response);
       });
   }
-
 
 //groups has been sidelined until a future date. keeping code in case needed later.
   // function createGroup() {

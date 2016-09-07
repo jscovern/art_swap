@@ -23,7 +23,6 @@
 <body ng-app="Art_Swap">
     <div class="row" ng-controller="ProfileController" ng-show="sharedservices.currentPath() != '/' && sharedservices.currentPath() != '/login' && sharedservices.currentPath() != '/register'">
     <nav class="navbar navbar-default navbar-fixed-top" ng-init="getUserInfo()">
-      <div class="container">
         <ul class="nav navbar-nav">
             <li><a href="/#/" class="glyphicon glyphicon-home" aria-hidden="true"></a></li>
             <li ng-show="sharedservices.loggedIn()"><a href="/#/profile/{{sharedservices.getWhoIsLoggedIn()}}" class="glyphicon glyphicon-user" aria-hidden="true"></a></li>
@@ -32,7 +31,6 @@
             <!-- <li><a href="/#/mygroups/{{currentUser._id}}">Groups</a></li> -->
             <li ng-show="sharedservices.loggedIn()"><a href="#" ng-click="sharedservices.logout()">Logout</a></li>
         </ul>
-      </div>
     </nav>
 </div>
 		<div ng-view></div>

@@ -13,7 +13,7 @@ var isAuth = function (req, res, next) {
     return next();
 	}
   else{
-  	res.redirect('/blah');
+  	res.redirect('/#/login');
   }
 };
 
@@ -23,7 +23,7 @@ router.post('/register',usersController.createNewUser);
 router.get('/logout', usersController.logout);
 router.post('/login',usersController.login);
 router.get('/api/user/:id',usersController.getUserInfo);
-router.put('/api/user/edit/:id',isAuth,usersController.updateUser);
+router.put('/api/user/edit/:id',usersController.updateUser);
 router.post('/api/gallery/new',galleriesController.createGallery);
 router.post('/api/work/new/:id',galleriesController.createWork);
 router.post('/api/group/new/:id',groupsController.newGroup);

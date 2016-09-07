@@ -35,6 +35,7 @@ function createGallery(req,res) {
 
 function createWork(req,res) {
 	var work = new Work(req.body);
+	work.created_by = req.user._id;
 	work.save(function(err) {
 		if(err){
 			console.log('error saving new work '+err);

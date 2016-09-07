@@ -1,6 +1,7 @@
 <div id="workShowContainer" ng-controller="ProfileController" ng-init="getWorkInfo()">
 	<div class="workShowLeft col-md-3">
 		<ul class="list-unstyled">
+			<li class="row standardFont text-center"><a ng-click="sharedservices.goBack()">Go Back To Profile Page</a></li>
 			<li class="row workName standardFont"><h2>{{currentWork.name}}</h2></li>
 			<li class="row workDate standardFont">{{currentWork.month}} {{currentWork.year}}</li>
 			<li class="row workDescription standardFont">{{currentWork.description}}</li>

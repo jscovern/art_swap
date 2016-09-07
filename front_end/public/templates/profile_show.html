@@ -16,7 +16,7 @@
 			<div id="memberSince">Member Since: {{currentUser.join_date}}</div>
 		</div>
 		<div class="row" ng-show="currentUser.liked_works.length>0">
-			<h4>Previously Liked Art:</h4>
+			<h4 class="standardFont">Previously Liked Art:</h4>
 			<div class="row leftSidePicContainer" ng-repeat="likedWork in currentUser.liked_works">
 				<a href="/#/work/{{likedWork._id}}"><img class="leftSidePic" ng-src="{{likedWork.img_url}}"></a>
 			</div>
