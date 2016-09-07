@@ -29,6 +29,7 @@ function likeThisWork(req,res) {
 									return res.json(err);
 								} else {
 									console.log('work successfully added to users liked_works');
+									checkForSwaps(req.body.user_id,work.created_by);
 									return res.json({work: work, user: user});
 								}
 							});
@@ -40,6 +41,24 @@ function likeThisWork(req,res) {
 	});
 }
 
+function checkForSwaps(likedBy_id,createdBy_id) { //likedBy_id is the user id of the person that clicked like, createdBy_id is the user id of the person that created the work
+	User.findById({_id: likedBy_id}, function(error,likedBy) {
+		if(error) {
+			console.log('error finding likedby: '+error);
+			return;
+		} else {
+			console.log('foudn the likedby user successfully');
+			console.log(likedBy);
+			//if the likedBy.liked_works.created_by === createdBy_id from the parameter above
+			//then that means that at least one swap should exist.  Then need to do the reverse
+			//and find the createdBy User, and check his liked_works, and see if any of the
+			//created_by on those, is the likedBy user.  If so, then we basically loop through
+			//both arrays, and make all combinations.  Check if those combinations exist already
+			//in the DB, and if they don't, post them.
+			return;
+		}
+	});
+}
 module.exports = {
 likeThisWork: likeThisWork
 };
