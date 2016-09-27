@@ -84,9 +84,7 @@ function logout(req,res) {
 
 function getUserInfo(req,res) {
 	var id = req.params.id;
-	console.log('id is: '+id);
 	User.findById({_id: id}).populate('liked_works').exec(function(error,user) {
-		console.log('user is: '+user);
 	if(error) {
 		return res.json({message: "Couldn't find the user b/c "+error});
 	}

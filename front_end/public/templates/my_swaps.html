@@ -1,19 +1,20 @@
 <div class="standardFont" id="mySwapsContainer" ng-controller="ProfileController" ng-init="findMySwaps()">
-	<div ng-repeat="likedBySwaps in mySwaps.likedBySwaps" ng-show="mySwaps.likedBySwaps.length > 0">
+	<div ng-repeat="likedByWorks in mySwaps.liked_by" ng-show="mySwaps.liked_by.length > 0">
 		<div class="col-md-3 leftSidePicContainer">
 			<div class="row">
-				<h3>{{likedBySwaps.liked_by_user.firstname}} {{likedBySwaps.liked_by_user.lastname}}</h3>
+				<h3>{{likedByWorks._id.liked_by_user.firstname}} {{likedByWorks._id.liked_by_user.lastname}}</h3>
 			</div>
 			<div class="row">
-				<img class="leftSidePic" ng-src="{{likedBySwaps.liked_by_work.img_url}}">
+				<img ng-repeat="work in likedByWorks.liked_by_work" class="leftSidePic" ng-src="{{work.img_url}}">
+				<img ng-repeat="workCreate in likedByWorks.created_by_work" class="leftSidePic" ng-src="{{workCreate.img_url}}">
 			</div>
 		</div>
 		<div class="col-md-offset-1 col-md-7 rightSidePicContainer">
 			<div class="row">
-				<h3>{{likedBySwaps.created_by_user.firstname}} {{likedBySwaps.created_by_user.lastname}}</h3>
+				<h3>{{likedByWorks._id.created_by_user.firstname}} {{likedByWorks._id.created_by_user.lastname}}</h3>
 			</div>
 			<div class="row">
-				<div class="col-md-3" ng-repeat="createdByWorks in likedBySwaps.created_by_works">
+				<div class="col-md-3" ng-repeat="createdByWorks in likedByWorks.created_by_works">
 					<img class="leftSidePic" ng-src="{{createdByWorks.img_url}}">
 				</div>
 			</div>
